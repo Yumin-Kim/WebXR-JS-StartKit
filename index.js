@@ -6,6 +6,6 @@ app.get("/",(req,res)=>{
     res.end();
 })
 
-app.listen(()=>{
+app.listen(PORT,()=>{
     console.log("Start");
 })
