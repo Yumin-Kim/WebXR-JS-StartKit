@@ -10,10 +10,10 @@ app.use("/", express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    database:process.env.DB_DATABASE,
-    user : process.env.DB_USERNAME,
-    password : process.env.DB_PASSWORD
+    host: "us-cdbr-east-02.cleardb.com",
+    database:"heroku_4f519a792970c53",
+    user : "bf200b2d81b012",
+    password : "b5161b6b"
 })
 app.get("/",  (req,res)=>{
     pool.getConnection((error , conn)=>{
