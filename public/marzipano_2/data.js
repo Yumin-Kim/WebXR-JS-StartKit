@@ -294,8 +294,8 @@ var APP_DATA = {
         {
           "yaw": 1.937646878016043,
           "pitch": -0.11319176814351017,
-          "title": "Title",
-          "text": `<img src="https://images.mypetlife.co.kr/content/uploads/2019/09/04222847/dog-panting-1024x683.jpg">`
+          "title": "201613131641",
+          "text": `<img src="https://www.seowon.ac.kr/CrossEditor/binary/images/002028/[%ED%81%AC%EA%B8%B0%EB%B3%80%ED%99%98]%EB%B2%A8%EB%A6%AC%EB%B2%84%ED%8A%BC.jpg">`
         }
       ]
     },
