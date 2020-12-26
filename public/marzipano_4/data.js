@@ -289,7 +289,7 @@ var APP_DATA = {
           "yaw": 1.474543260576092,
           "pitch": -0.2593272299135414,
           "title": "Title",
-          "text": "Text"
+          "text": "aasdasdasdasdasdasda"
         },
         {
           "yaw": 1.8993177534116796,

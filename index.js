@@ -6,17 +6,20 @@ const PORT = process.env.PORT ? process.env.PORT : 3000;
 const app = express();
 
 dotenv.config();
-app.use("/", express.static("public/marzipano_4"));
+
+app.use("/", express.static("public/marzipano_5"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     database:process.env.DB_DATABASE,
     user : process.env.DB_USERNAME,
     password : process.env.DB_PASSWORD
 })
+
 app.get("/",  (req,res)=>{
-    res.sendFile(__dirname + "/public/marzipano_4/index.html");
+    res.sendFile(__dirname + "/public/marzipano_5/index.html");
 })
 app.listen(PORT,()=>{
     console.log("Start");
