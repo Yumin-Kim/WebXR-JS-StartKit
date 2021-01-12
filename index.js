@@ -7,7 +7,7 @@ const app = express();
 
 dotenv.config();
 
-app.use("/", express.static("public/WebXRProject_1"));
+app.use("/", express.static("public/ReactBuildWebVR"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -19,7 +19,7 @@ const pool = mysql.createPool({
 })
 
 app.get("/",  (req,res)=>{
-    res.sendFile(__dirname + "/public/WebXRProject_1/index.html");
+    res.sendFile(__dirname + "/public/ReactBuildWebVR/index.html");
 })
 app.listen(PORT,()=>{
     console.log("Start");
