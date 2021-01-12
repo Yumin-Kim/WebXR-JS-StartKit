@@ -1,6 +1,6 @@
 {
-"companyName": "HelloWebXR",
-"productName": "WebXRProject",
+"companyName": "DefaultCompany",
+"productName": "WebGL",
 "productVersion": "0.1",
 "dataUrl": "WebXRProject_1.data.unityweb",
 "wasmCodeUrl": "WebXRProject_1.wasm.code.unityweb",
@@ -12,5 +12,5 @@
 "cacheControl": {"default": "must-revalidate"},
 "developmentBuild": false,
 "multithreading": false,
-"unityVersion": "2019.3.13f1"
+"unityVersion": "2019.4.16f1"
 }
