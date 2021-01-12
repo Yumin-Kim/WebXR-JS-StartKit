@@ -29,6 +29,7 @@
 * 기존의 git과 같이 사용하면 git push origin master // git push heroku master를 주의해서 작성해야한다. 
 **간단한 heroku 명령어**
 ```
+    heroku git:remote <프로젝트 명> [heroku git주소를 remote 하기위해서 ]
     heroku apps:rename newname [프로젝트 명을 작성하지 않으면 랜덤해서 생성되는데 구부분을 해결하기위한 명령어]
     heroku ps:scale web=1 [동작하고 있지 않으면 다음 명령어로 기동시킨다.]
     heroku logs --tail [Debugging]
