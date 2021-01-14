@@ -7,7 +7,7 @@ const app = express();
 
 dotenv.config();
 
-app.use("/", express.static("public/aframe-blink-teleportation"));
+app.use("/", express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // })
 
 app.get("/",  (req,res)=>{
-    res.sendFile(__dirname + "/public/aframe-blink-teleportation/index.html");
+    res.sendFile(__dirname + "/public/test.html");
 })
 app.listen(PORT,()=>{
     console.log("Start");
