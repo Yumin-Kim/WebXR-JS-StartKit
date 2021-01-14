@@ -7,7 +7,7 @@ const app = express();
 
 dotenv.config();
 
-app.use("/", express.static("public/examples"));
+app.use("/", express.static("public/aframe-blink-teleportation"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -19,7 +19,7 @@ const pool = mysql.createPool({
 })
 
 app.get("/",  (req,res)=>{
-    res.sendFile(__dirname + "/public/examples/multiple/index.html");
+    res.sendFile(__dirname + "/public/aframe-blink-teleportation/index.html");
 })
 app.listen(PORT,()=>{
     console.log("Start");
