@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // })
 
 app.get("/",  (req,res)=>{
-    res.sendFile(__dirname + "/public/aframe-blink-teleportation/index.html");
+    res.sendFile(__dirname + "/public/index.html");
 })
 app.listen(PORT,()=>{
     console.log("Start");
