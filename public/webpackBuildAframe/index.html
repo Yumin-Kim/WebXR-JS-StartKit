@@ -1,0 +1,18 @@
+<html>
+<head><script type="text/javascript" src="main.js"></script></head>
+<body>
+    <a-scene>
+        <a-assets></a-assets>
+        <a-entity>
+          <a-camera></a-camera>
+          <a-entity sphere-collider="objects: a-box" super-hands="colliderEvent: raycaster-intersection;
+          colliderEventProperty: els;
+          colliderEndEvent: raycaster-intersection-cleared;
+          colliderEndEventProperty: clearedEls"></a-entity>
+          <a-entity sphere-collider="objects: a-box" super-hands hand-controls="hand: right"></a-entity>
+        </a-entity>
+        <!-- hover & drag-drop won't have any obvious effect without some additional event handlers or components. See the examples page for more -->
+        <a-box hoverable grabbable stretchable draggable dropppable color="blue" position="0 0 -1"></a-box>
+      </a-scene>
+</body>
+</html>

@@ -7,7 +7,7 @@ const app = express();
 
 dotenv.config();
 
-app.use("/", express.static("public/Aframe-TeleportControl"));
+app.use("/", express.static("public/webpackBuildAframe"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // })
 
 app.get("/",  (req,res)=>{
-    res.sendFile(__dirname + "/public/Aframe-TeleportControl/index.html");
+    res.sendFile(__dirname + "/public/webpackBuildAframe/index.html");
 })
 app.listen(PORT,()=>{
     console.log("Start");
