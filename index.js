@@ -7,7 +7,7 @@ const app = express();
 
 dotenv.config();
 
-app.use("/", express.static("public/webpackBuildAframe"));
+app.use("/", express.static("public/examples"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -18,8 +18,11 @@ app.use(express.urlencoded({ extended: true }));
 //     password : process.env.DB_PASSWORD
 // })
 
+// app.get("/",  (req,res)=>{
+//     res.sendFile(__dirname + "/public/webpackBuildAframe/index.html");
+// })
 app.get("/",  (req,res)=>{
-    res.sendFile(__dirname + "/public/webpackBuildAframe/index.html");
+    res.sendFile(__dirname + "/public/examples/physics/index.html");
 })
 app.listen(PORT,()=>{
     console.log("Start");
