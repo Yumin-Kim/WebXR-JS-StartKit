@@ -86,7 +86,8 @@
       position="0 0 0" rotation="0 0 0">
       <a-entity id="head" camera="active: true" position="0 1.6 0"
         look-controls="pointerLockEnabled: true; reverseMouseDrag: true"></a-entity>
-      <a-entity oculus-touch-controls="hand: left"></a-entity>
+      <!-- <a-entity oculus-touch-controls="hand: left"></a-entity> -->
+      <a-entity id="lhand" mixin="controller-left"></a-entity>
       <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color: #15ACCF" laser-controls
         raycaster="showLine: true; far: 10; interval: 0; objects: .clickable, a-link;"
         line="color: #7cfc00; opacity: 0.5" visible="true"></a-entity>
