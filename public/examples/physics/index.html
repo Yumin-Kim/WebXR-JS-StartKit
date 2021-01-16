@@ -13,9 +13,9 @@
   <script
     src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
 
-  <script src="../examples/copyWebVR/aframe-extras.min.js"></script>
+  <!-- <script src="../examples/copyWebVR/aframe-extras.min.js"></script>
   <script src="../examples/copyWebVR/aframe-teleport-controls.js"></script>
-  <script src="../examples/copyWebVR/aframe-thumb-controls-component.min.js"></script>
+  <script src="../examples/copyWebVR/aframe-thumb-controls-component.min.js"></script> -->
 
 
 
@@ -80,6 +80,8 @@
                               colliderEndEventProperty: clearedEls;">
       </a-mixin>
     </a-assets>
+    <!-- 현재 초기 코드를 집어 넣었을때 계속 인식을 못하고 있음
+    src 부분에 문제가 있는지 잘 모르겠음 기존의 코드와 비교 해보아야할듯 -->
     <a-entity>
       <a-camera positon="0 1.6 0"></a-camera>
       <a-entity id="rhand" mixin="touch"
