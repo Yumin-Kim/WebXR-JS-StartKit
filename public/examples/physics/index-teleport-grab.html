@@ -135,7 +135,7 @@
 
         <!-- Copy Webvr move and teleport -->
          <a-entity id="cameraRig" 
-        
+        movement-controls 
         navigator="cameraRig: #cameraRig; 
         cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable" 
         position="0 0 0" 
@@ -154,7 +154,14 @@
                 visible="true"></a-entity>
         </a-entity>
         <!--  
-        teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60" 
+            aframe extra
+            movement-controls로 인해서 움직이게 제공
+            근데 왜 오른쪽만 움직이는지 아직은..
+            movement-controls="constrainToNavMesh: false;" 
+        
+            teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60" 
+        
+            물건을 잡고 물건을 잡은 손으로 움직임을 제어후 그다음에는 해당 잡은 물건을 놓았다고 인식하여 그대로 놓게 된다.
         -->
 
 
