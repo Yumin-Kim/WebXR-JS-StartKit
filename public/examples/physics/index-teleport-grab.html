@@ -95,7 +95,7 @@
         </a-entity>
 
         <!-- Teleport Camera and Component -->
-        <!-- <a-entity id="cameraRig">
+         <a-entity id="cameraRig">
             <a-sphere scale="0.1 0.1 0.1"></a-sphere>
             <a-entity id="head" camera wasd-controls look-controls></a-entity>
             <a-entity id="leftHand" hand-controls="hand: left; 
@@ -104,18 +104,10 @@
                 teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60"
                 visible="true">
             </a-entity>
-            <a-entity id="right-hand" teleport-controls="collisionEntities: #floorRight;
-                      startEvents: teleportstart; endEvents: teleportend;
-                      button: trigger;
-                      cameraRig: #cameraRig;
-                      teleportOrigin: #head;
-                      curveHitColor: #9999ff;
-                      curveMissColor: #ff0000;
-                      curveNumberPoints: 50;
-                      curveLineWidth: 0.015;
-                      curveShootingSpeed: 4">
+            <a-entity id="rhand" mixin="touch"
+            hand-controls="hand: right">
             </a-entity>
-        </a-entity> -->
+        </a-entity> 
 
         <!-- Grab Camera and Component -->
         <a-entity>
