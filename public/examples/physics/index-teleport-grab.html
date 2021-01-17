@@ -95,7 +95,7 @@
         </a-entity>
 
         <!-- Teleport Camera and Component -->
-        <a-entity id="cameraRig">
+        <!-- <a-entity id="cameraRig">
             <a-sphere scale="0.1 0.1 0.1"></a-sphere>
             <a-entity id="head" camera wasd-controls look-controls></a-entity>
             <a-entity id="leftHand" hand-controls="hand: left; 
@@ -115,8 +115,21 @@
                       curveLineWidth: 0.015;
                       curveShootingSpeed: 4">
             </a-entity>
-        </a-entity>
+        </a-entity> -->
+
+        <!-- Grab Camera and Component -->
+        <a-entity>
+            <a-camera positon="0 1.6 0"></a-camera>
+            <a-entity id="rhand" mixin="touch"
+                      hand-controls="hand: right">
+            </a-entity>
+            <a-entity id="lhand" mixin="touch"
+                      hand-controls="hand: left">
+            </a-entity>
+          </a-entity>
         
+
+        <!-- Grab Box -->
         <a-entity class="cube" mixin="cube" position="0 0.265 -1" material="color: red"></a-entity>
         <a-entity class="cube" mixin="cube" position="0 0.265 -0.5" material="color: red"></a-entity>
         <a-entity class="cube" mixin="cube" position="-1 0.265 -1" material="color: blue"></a-entity>
