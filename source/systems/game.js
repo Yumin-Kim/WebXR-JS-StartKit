@@ -10,12 +10,16 @@ AFRAME.registerSystem('game', {
 	init: function () {
 		this.socket = io();
 		this.throttledFunction = AFRAME.utils.throttle(this.everySecond, 1000, this);
-
+		console.log("Aframe registerSystem.")
 		this.socket.on('connect', () => {
 			this.data.localPlayerId = this.socket.id;
 			let localPlayer = document.createElement('a-player');
 			localPlayer.setAttribute('id', this.socket.id);
 			document.getElementById('camera').appendChild(localPlayer);
+			console.log(">>>>>>>>>>>>>> Start connect")
+			const camera = document.getElementById('camera');
+			console.log(camera)
+
 		});
 
 		this.socket.on('remoteData', (data) => { this.data.remoteData = data });

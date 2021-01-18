@@ -24,7 +24,7 @@
     <!-- Camera Rig - has to be here because of A-Frame's order-dependent rendering -->
     <a-entity id="rig">
       <a-entity quest-controls>
-        <a-entity id="camera" camera="active: true" position="0 2 0" look-controls wasd-controls>
+        <a-entity id="camera" camera position="0 1.6 0" look-controls wasd-controls>
           <!-- <a-entity raycaster="objects: .ui, .clickable; far: 20"></a-entity> -->
           <a-entity id="leftHand" hand-controls="hand: left; 
             handModelStyle: lowPoly; 
@@ -36,10 +36,7 @@
       </a-entity>
     </a-entity>
 
-    <a-entity id="cameraRig">
-
-    </a-entity>
-
+    
   </a-scene>
 </body>
 
