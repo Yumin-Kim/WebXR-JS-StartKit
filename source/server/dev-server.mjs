@@ -22,18 +22,11 @@ app.use(webpackDevMiddleware(compiler, { publicPath: webpackConfig.output.public
 app.use('/assets/', express.static(publicPath + '/assets/'));
 
 // start HTTPS server listening on port 2002
-let server = https.createServer({
-	key: fs.readFileSync('localhost-key.pem'),
-	cert: fs.readFileSync('localhost.pem'),
-	requestCert: false,
-	rejectUnauthorized: false
-}, app).listen(port, () => {
-	console.log('listening on *:2002')
-});
-
+const server = app.listen(port,()=>{
+	console.log("Start")
+})
 // create io listener
 const io = socketio.listen(server);
-
 // serve index.html when user requests '/'
 app.get('/', function (req, res) {
 	res.sendFile(publicPath + '/index.html');

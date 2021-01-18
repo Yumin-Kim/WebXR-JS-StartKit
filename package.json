@@ -7,13 +7,14 @@
     "build:dev": "webpack --env dev",
     "build:prod": "webpack -p --env production",
     "heroku-postbuild": "yarn run build:prod",
-    "serve": "NODE_ENV=development nodemon source/server/dev-server.mjs",
-    "start": "NODE_ENV=production node source/server/server.mjs"
+    "serve": "cross-env NODE_ENV=development nodemon source/server/dev-server.mjs",
+    "start": "cross-env NODE_ENV=production node source/server/server.mjs"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "aframe": "^1.0.4",
+    "cross-env": "^7.0.3",
     "express": "^4.17.1",
     "heroku-ssl-redirect": "0.0.4",
     "socket.io": "^2.3.0",
