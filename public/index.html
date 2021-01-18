@@ -25,25 +25,19 @@
     <a-entity id="rig">
       <a-entity>
         <a-entity id="camera"position="0 1.6 0">
-          <a-entity id="cameraRig">
-            <a-entity id="head" camera wasd-controls look-controls></a-entity>
-            <a-entity id="leftHand" hand-controls="hand: left; 
-                      handModelStyle: lowPoly; 
-                      color: #15ACCF"
-              teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60"
-              visible="true">
+          <a-entity>
+            <a-entity id="cameraRig">
+
+              <a-entity id="head" camera wasd-controls look-controls></a-entity>
+              <a-box position="0 2 0"></a-box>
+              <a-entity id="leftHand" hand-controls="hand: left; 
+                        handModelStyle: lowPoly; 
+                        color: #15ACCF"
+                teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60"
+                visible="true">
+              </a-entity>
             </a-entity>
-            <a-entity id="right-hand" teleport-controls="collisionEntities: #floorRight;
-                        startEvents: teleportstart; endEvents: teleportend;
-                        button: trigger;
-                        cameraRig: #cameraRig;
-                        teleportOrigin: #head;
-                        curveHitColor: #9999ff;
-                        curveMissColor: #ff0000;
-                        curveNumberPoints: 50;
-                        curveLineWidth: 0.015;
-                        curveShootingSpeed: 4" >
-            </a-entity>
+
           </a-entity>
         </a-entity> 
       </a-entity>
