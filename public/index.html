@@ -25,14 +25,12 @@
           <!--  -->
           <a-entity id="camera" camera="active: true" position="0 1.6 0" look-controls wasd-controls>
           </a-entity>
-          <a-entity id="cameraRig">
-            <a-entity id="head" camera wasd-controls look-controls></a-entity>
+            <!-- <a-entity id="head" camera wasd-controls look-controls></a-entity> -->
             <a-entity id="leftHand" hand-controls="hand: left; 
                       handModelStyle: lowPoly; 
                       color: #15ACCF"
-              teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60"
+              teleport-controls="cameraRig: #rig; teleportOrigin: #camera; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60"
               visible="true">
-            </a-entity>
           </a-entity>
 
         <!-- </a-entity> -->
