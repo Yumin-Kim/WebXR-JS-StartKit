@@ -3,24 +3,22 @@ import express from 'express';
 import socketio from 'socket.io'
 import path from 'path';
 import { fileURLToPath } from 'url';
-import sslRedirect from 'heroku-ssl-redirect';
 import sockets from './sockets.js';
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicPath = path.join(__dirname, '..', '..', 'public');
-const port = process.env.PORT || 2002;
+const port = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV !== "production") {
 	console.log(`Invalid NODE_ENV, please use 'production'`);
 }
 
 console.log('Running in PRODUCTION, this will NOT work locally');
-let server = app.use(sslRedirect())
-	.use(express.static(publicPath))
-	.set('assets', path.join(publicPath, 'assets'))
-	.get('/', (req, res) => res.sendFile(path.join(publicPath, 'index.html')))
-	.listen(port, () => console.log(`Listening...`));
+app.use(express.static(publicPath))
+const server = app.listen(port,()=>{
+	console.log("Start")
+})
 
 // create io listener
 const io = socketio.listen(server);
