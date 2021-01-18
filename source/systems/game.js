@@ -50,8 +50,10 @@ AFRAME.registerSystem('game', {
 		this.updatePlayersInScene(this.data, this.el.sceneEl);
 		this.updateLocalPlayerOnServer(this.data);
 	},
-
+	
 	updatePlayersInScene: (() => {
+		console.log("input updatePlayersInScene")
+		//player 생성
 		const constructPlayer = (data, scene) => {
 			// TODO: Check for race conditions and consider implementing concept of initialising players
 			let remotePlayer = document.createElement('a-player');
@@ -62,19 +64,22 @@ AFRAME.registerSystem('game', {
 			scene.appendChild(remotePlayer);
 			console.log("updatePlayersInScene",scene)
 		}
-
+		// update 
 		const updatePlayer = (data) => {
 			let remotePlayer = document.getElementById(data.id);
 			remotePlayer.object3D.position.copy(data.position);
 			remotePlayer.object3D.rotation.setFromQuaternion(data.quaternion);
 		}
-
+		// socket과 계속 통신
 		return (gameData, scene) => {
+			// console.log("return context updatePlayersInScene_param_1",gameData);
+			// console.log("return context updatePlayersInScene_param_2",scene);
 			if (!gameData.localPlayerId) { return };
 			gameData.remoteData.forEach((data) => {
 				if (gameData.localPlayerId != data.id) {
 					if (!document.getElementById(data.id)) {
 						// Append player to scene if remote player does not exist
+						console.log("constructPlayer")
 						constructPlayer(data, scene);
 					} else {
 						console.log("UpdatePlayer")

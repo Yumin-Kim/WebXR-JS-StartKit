@@ -58,6 +58,7 @@ AFRAME.registerComponent('player', {
 	},
 
 	initSocket: function (shape, color, position, quaternion) {
+		console.log("Register Player Component ")
 		if (!this.game.socket) { return };
 		this.game.socket.emit('init', {
 			shape: shape,
