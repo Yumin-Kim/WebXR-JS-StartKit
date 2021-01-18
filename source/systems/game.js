@@ -60,6 +60,7 @@ AFRAME.registerSystem('game', {
 			remotePlayer.setAttribute('color', data.color);
 			remotePlayer.setAttribute('position', data.position);
 			scene.appendChild(remotePlayer);
+			console.log("updatePlayersInScene",scene)
 		}
 
 		const updatePlayer = (data) => {
@@ -76,6 +77,7 @@ AFRAME.registerSystem('game', {
 						// Append player to scene if remote player does not exist
 						constructPlayer(data, scene);
 					} else {
+						console.log("UpdatePlayer")
 						// Update remote player position and rotation if it does exist
 						updatePlayer(data);
 					}
@@ -112,15 +114,15 @@ AFRAME.registerSystem('game', {
 		// https://aframe.io/docs/1.0.0/introduction/best-practices.html#tick-handlers
 		let position = new THREE.Vector3();
 		let quaternion = new THREE.Quaternion();
-
+		console.log("asd")
 		return function (gameData) {
+			// console.log(gameData) update
 			if (!gameData.localPlayerId) { return };
 			let localPlayerElement = document.getElementById(gameData.localPlayerId);
 			if (localPlayerElement) {
 				localPlayerElement.object3D.getWorldPosition(position);
 				localPlayerElement.object3D.getWorldQuaternion(quaternion);
 			}
-
 			this.socket.emit('update', {
 				position: position,
 				quaternion: quaternion
