@@ -9,6 +9,18 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import config from '../../webpack.config.js';
 import sockets from './sockets.js';
+import multer from "multer";
+
+const storage = multer.diskStorage({
+	destination:function(req,file,cd){
+		cd(null,`public/upload`);
+	},
+	filename:function(req,file,cd){
+		cd(null,file.originalname);
+	}
+})
+
+const upload = multer({storage:storage})
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -19,7 +31,7 @@ let webpackConfig = config();
 
 const compiler = webpack(webpackConfig);
 app.use(webpackDevMiddleware(compiler, { publicPath: webpackConfig.output.publicPath }));
-app.use('/assets/', express.static(publicPath + '/assets/'));
+app.use('/', express.static(publicPath));
 
 // start HTTPS server listening on port 2002
 const server = app.listen(port,()=>{
@@ -28,10 +40,18 @@ const server = app.listen(port,()=>{
 // create io listener
 const io = socketio.listen(server);
 // serve index.html when user requests '/'
-app.get('/', function (req, res) {
-	res.sendFile(publicPath + '/index.html');
-});
-
+// app.get('/', function (req, res) {
+	// res.sendFile(publicPath + '/index.html');
+	// });
+app.get("/",(req,res)=>{
+	res.sendFile(publicPath + "/test.html")
+})
+app.get("/socket",(req,res)=>{
+	res.sendFile(publicPath + "/index.html")
+})
+app.post("/upload2",upload.single("file2"),(req,res)=>{
+	res.send("upload" + JSON.stringify(req.file) )
+})
 sockets(io);
 
 // called 100 times a second on the server side

@@ -4,6 +4,17 @@ import socketio from 'socket.io'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import sockets from './sockets.js';
+import multer from "multer";
+
+const storage = multer.diskStorage({
+	destination:function(req,file,cd){
+		cd(null,`public/upload`);
+	},
+	filename:function(req,file,cd){
+		cd(null,file.originalname);
+	}
+})
+const upload = multer({storage:storage})
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -19,15 +30,20 @@ app.use(express.static(publicPath))
 const server = app.listen(port,()=>{
 	console.log("Start")
 })
-
-// create io listener
 const io = socketio.listen(server);
-
 // serve index.html when user requests '/'
-app.get('/', function (req, res) {
-	res.sendFile(publicPath + '/index.html');
-});
-
+// app.get('/', function (req, res) {
+	// res.sendFile(publicPath + '/index.html');
+	// });
+app.get("/",(req,res)=>{
+	res.sendFile(publicPath + "/test.html")
+})
+app.get("/socket",(req,res)=>{
+	res.sendFile(publicPath + "/index1.html")
+})
+app.post("/upload2",upload.single("file2"),(req,res)=>{
+	res.send("upload" + JSON.stringify(req.file) )
+})
 sockets(io);
 
 // TODO: consider separating this into it's own file with interval as an argument
