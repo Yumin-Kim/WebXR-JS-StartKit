@@ -53,11 +53,12 @@ AFRAME.registerComponent('player', {
 			console.log(`Local player ${this.game.data.localPlayerId} joined as a ${color} ${shape}`);
 			this.initSocket(shape, color, position, quaternion);
 		} else {
-			console.log(`Player ${this.data.id} joined as a ${color} ${shape}`);
+			console.log(`Player ${this.data.id} joined asd as a ${color} ${shape}`);
 		}
 	},
 
 	initSocket: function (shape, color, position, quaternion) {
+		console.log("Register Player Component ")
 		if (!this.game.socket) { return };
 		this.game.socket.emit('init', {
 			shape: shape,

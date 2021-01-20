@@ -10,12 +10,16 @@ AFRAME.registerSystem('game', {
 	init: function () {
 		this.socket = io();
 		this.throttledFunction = AFRAME.utils.throttle(this.everySecond, 1000, this);
-
+		console.log("Aframe registerSystem.")
 		this.socket.on('connect', () => {
 			this.data.localPlayerId = this.socket.id;
 			let localPlayer = document.createElement('a-player');
 			localPlayer.setAttribute('id', this.socket.id);
 			document.getElementById('camera').appendChild(localPlayer);
+			console.log(">>>>>>>>>>>>>> Start connect")
+			const camera = document.getElementById('camera');
+			console.log(camera)
+
 		});
 
 		this.socket.on('remoteData', (data) => { this.data.remoteData = data });
@@ -46,8 +50,10 @@ AFRAME.registerSystem('game', {
 		this.updatePlayersInScene(this.data, this.el.sceneEl);
 		this.updateLocalPlayerOnServer(this.data);
 	},
-
+	
 	updatePlayersInScene: (() => {
+		console.log("input updatePlayersInScene")
+		//player 생성
 		const constructPlayer = (data, scene) => {
 			// TODO: Check for race conditions and consider implementing concept of initialising players
 			let remotePlayer = document.createElement('a-player');
@@ -56,22 +62,27 @@ AFRAME.registerSystem('game', {
 			remotePlayer.setAttribute('color', data.color);
 			remotePlayer.setAttribute('position', data.position);
 			scene.appendChild(remotePlayer);
+			console.log("updatePlayersInScene",scene)
 		}
-
+		// update 
 		const updatePlayer = (data) => {
 			let remotePlayer = document.getElementById(data.id);
 			remotePlayer.object3D.position.copy(data.position);
 			remotePlayer.object3D.rotation.setFromQuaternion(data.quaternion);
 		}
-
+		// socket과 계속 통신
 		return (gameData, scene) => {
+			// console.log("return context updatePlayersInScene_param_1",gameData);
+			// console.log("return context updatePlayersInScene_param_2",scene);
 			if (!gameData.localPlayerId) { return };
 			gameData.remoteData.forEach((data) => {
 				if (gameData.localPlayerId != data.id) {
 					if (!document.getElementById(data.id)) {
 						// Append player to scene if remote player does not exist
+						console.log("constructPlayer")
 						constructPlayer(data, scene);
 					} else {
+						console.log("UpdatePlayer")
 						// Update remote player position and rotation if it does exist
 						updatePlayer(data);
 					}
@@ -108,15 +119,15 @@ AFRAME.registerSystem('game', {
 		// https://aframe.io/docs/1.0.0/introduction/best-practices.html#tick-handlers
 		let position = new THREE.Vector3();
 		let quaternion = new THREE.Quaternion();
-
+		console.log("asd")
 		return function (gameData) {
+			// console.log(gameData) update
 			if (!gameData.localPlayerId) { return };
 			let localPlayerElement = document.getElementById(gameData.localPlayerId);
 			if (localPlayerElement) {
 				localPlayerElement.object3D.getWorldPosition(position);
 				localPlayerElement.object3D.getWorldQuaternion(quaternion);
 			}
-
 			this.socket.emit('update', {
 				position: position,
 				quaternion: quaternion

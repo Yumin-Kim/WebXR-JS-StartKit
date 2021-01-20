@@ -9,6 +9,12 @@
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
    -->
     <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="./module/aframe-teleport-controls.min.js"></script>
+    <script src="https://unpkg.com/aframe-input-mapping-component/dist/aframe-input-mapping-component.min.js"></script>
+    <script src="./module/common/mappings.js"></script>
+
+
+
     <!-- Importing aframe-physics-system with Yarn/NPM causes issues -->
   </head>
 
@@ -28,13 +34,41 @@
 
       <!-- Camera Rig - has to be here because of A-Frame's order-dependent rendering -->
       <a-entity id="rig">
-        <a-entity quest-controls>
+        <!-- <a-entity quest-controls> -->
+          <!--  -->
           <a-entity id="camera" camera="active: true" position="0 1.6 0" look-controls wasd-controls>
-            <a-entity raycaster="objects: .ui, .clickable; far: 20"></a-entity>
           </a-entity>
-        </a-entity>
+            <!-- <a-entity id="head" camera wasd-controls look-controls></a-entity> -->
+            <a-entity id="leftHand" hand-controls="hand: left; 
+                      handModelStyle: lowPoly; 
+                      color: #15ACCF"
+              teleport-controls="cameraRig: #rig; teleportOrigin: #camera; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60"
+              visible="true">
+          </a-entity>
+
+        <!-- </a-entity> -->
       </a-entity>
 
+      <!-- <a-entity id="rig">
+        <a-entity>
+          <a-entity id="camera"position="0 1.6 0">
+            <a-entity>
+
+              <a-entity id="cameraRig">
+                <a-entity id="head" camera wasd-controls look-controls></a-entity>
+                <a-entity id="leftHand" hand-controls="hand: left; 
+                          handModelStyle: lowPoly; 
+                          color: #15ACCF"
+                  teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60"
+                  visible="true">
+                </a-entity>
+              </a-entity>
+  
+            </a-entity>
+          </a-entity> 
+        </a-entity>
+      </a-entity> -->
+  
     </a-scene>
   </body>
 </html>
