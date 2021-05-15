@@ -39,9 +39,17 @@ function handleDisconnect() {
 }
 
 const insertSQL =
-  "INSERT INTO `heroku_4f519a792970c53`.`user` (`user_id`, `name`, `passwd`, `access_code`, `dept`, `sub_dept`, `phone_number`) VALUES (?', '?', '?', '?', '?', '?', '?')";
+  "INSERT INTO `heroku_4f519a792970c53`.`user` (`user_id`, `name`, `passwd`, `access_code`, `dept`, `sub_dept`, `phone_number`) VALUES ('?', '?', '?', '?', '?', '?', '?')";
 app.post("/login", async (req, res) => {
-  await conn.query(insertSQL, (error, row, fields) => {
+  const data = req.body;
+  const parseData = Object.values(JSON.parse(data.json)).reduce(
+    (prev, cur, index) => {
+      prev.push(cur);
+      return prev;
+    },
+    []
+  );
+  await conn.query(insertSQL, parseData, (error, row, fields) => {
     if (error) {
       console.log(error);
     } else {
@@ -50,6 +58,7 @@ app.post("/login", async (req, res) => {
       res.json({ operation: "sucess" });
     }
   });
+  await conn.end();
 });
 app.get("/list", async (req, res) => {
   let data;
