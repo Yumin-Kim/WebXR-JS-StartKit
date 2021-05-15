@@ -27,7 +27,10 @@ function handleDisconnect() {
 
   conn.on("error", function (err) {
     console.log("conn error", err);
-    if (err.code === "PROTOCOL_CONNECTION_LOST") {
+    if (
+      err.code === "PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR" ||
+      err.code === "PROTOCOL_CONNECTION_LOST"
+    ) {
       return handleDisconnect();
     } else {
       throw err;
@@ -35,19 +38,10 @@ function handleDisconnect() {
   });
 }
 
-handleDisconnect();
 const insertSQL =
-  "INSERT INTO `heroku_4f519a792970c53`.`user` (`user_id`, `name`, `passwd`, `access_code`, `dept`, `sub_dept`, `phone_number`) VALUES ('2', 'qwe', '123', '1', '123', '123', '123123')";
-app.post("/login", (req, res) => {
-  const data = req.body;
-  const parseData = Object.values(JSON.parse(data.json)).reduce(
-    (prev, cur, index) => {
-      prev.push(cur);
-      return prev;
-    },
-    []
-  );
-  conn.query(insertSQL, parseData, (error, row, fields) => {
+  "INSERT INTO `heroku_4f519a792970c53`.`user` (`user_id`, `name`, `passwd`, `access_code`, `dept`, `sub_dept`, `phone_number`) VALUES (?', '?', '?', '?', '?', '?', '?')";
+app.post("/login", async (req, res) => {
+  await conn.query(insertSQL, (error, row, fields) => {
     if (error) {
       console.log(error);
     } else {
@@ -57,7 +51,14 @@ app.post("/login", (req, res) => {
     }
   });
 });
-
+app.get("/list", async (req, res) => {
+  let data;
+  await conn.query("select * from user", (error, row) => {
+    console.log(row);
+    data = row;
+    return res.send(data);
+  });
+});
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/examples/physics/index.html");
 });
