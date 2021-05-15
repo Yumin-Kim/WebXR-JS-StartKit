@@ -17,12 +17,14 @@ const conn = mysql.createConnection({
     user : process.env.DB_USERNAME,
     password : process.env.DB_PASSWORD
 })
-
+setInterval(function () {
+  conn.query('SELECT 1');
+}, 5000);
 // pool.connect()
 // console.log(pool.query("select * from user"))
 const insertSQL =
   "INSERT INTO user (user_id, name, passwd, access_code, dept, sub_dept, phone_number) VALUES (?, ?, ?, 3, ?, ?, ?)";
-app.post("/login", async (req, res) => {
+app.post("/signup", async (req, res) => {
   const data = req.body;
   const parseData = Object.values(JSON.parse(data.json)).reduce(
     (prev, cur, index) => {
@@ -41,14 +43,61 @@ app.post("/login", async (req, res) => {
       res.json({ operation: "sucess" });
     }
   });
-  await conn.end();
 });
-app.post("/logout",(req,res)=>{
+app.post("/dropuser",(req,res)=>{
     const data =req.body
+    const parseData = JSON.parse(data.json)
+    conn.query(`select * from user where user_id=${parseData.user_id}`,(error,row)=>{
+      console.log(row);
+      if(row !== undefined){
+        if(row.length === 0 ){
+          res.json({operation:"failure"})
+        }else{
+          conn.query(`delete from user where user_id=${parseData.user_id}`,(error,row)=>{
+            res.json({operation:"sucess"})
+          })
+        }
+      }else{
+        res.json({operation:"failure"})
+      }
+    })
+})
 
-    console.log(JSON.parse(data.json))
-
-    res.json({operation:"sucess"})
+app.post("/login",(req,res)=>{
+  const data =req.body
+  const parseData = JSON.parse(data.json)
+  conn.query(`select * from user where user_id=${parseData.user_id} and passwd=${parseData.pwd}`,(error,row)=>{
+    if(row !== undefined){
+      if(row.length === 0 ){
+        res.json({login:"NO"})
+      }else{
+          res.json({login:"YES",user_id:row[0].user_id,user_name:row[0].name})
+      }
+    }else{
+      res.json({login:"NO"})
+    }
+  })
+})
+app.post("/logout",(req,res)=>{
+  res.send("clear")
+})
+app.post("/changepassword",(req,res)=>{
+  const data =req.body
+  const parseData = JSON.parse(data.json)
+  console.log(parseData);
+  conn.query(`select * from user where user_id=${parseData.user_id} and passwd=${parseData.pwd}`,(error,row)=>{
+    if(row !== undefined){
+      if(row.length === 0 ){
+        res.json({operation : "failure"})
+      }else{
+        conn.query(`update user set passwd=${parseData.newpwd} where user_id=${parseData.user_id}`,(error,row)=>{
+          res.json({operation : "sucess"})
+        })
+      }
+    }else{
+      res.json({operation : "failure"})
+    }
+  })
 })
 app.get("/",  (req,res)=>{
     res.sendFile(__dirname + "/public/examples/physics/index.html");
