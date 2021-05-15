@@ -17,7 +17,25 @@ const conn = mysql.createConnection({
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
 });
-conn.connect();
+function handleDisconnect() {
+  conn.connect(function (err) {
+    if (err) {
+      console.log("error when connecting to conn:", err);
+      setTimeout(handleDisconnect, 2000);
+    }
+  });
+
+  conn.on("error", function (err) {
+    console.log("conn error", err);
+    if (err.code === "PROTOCOL_CONNECTION_LOST") {
+      return handleDisconnect();
+    } else {
+      throw err;
+    }
+  });
+}
+
+handleDisconnect();
 const insertSQL =
   "INSERT INTO `heroku_4f519a792970c53`.`user` (`user_id`, `name`, `passwd`, `access_code`, `dept`, `sub_dept`, `phone_number`) VALUES ('2', 'qwe', '123', '1', '123', '123', '123123')";
 app.post("/login", (req, res) => {
