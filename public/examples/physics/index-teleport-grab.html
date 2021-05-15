@@ -27,36 +27,36 @@
     <script src="../examples/copyWebVR/aframe-teleport-controls.js"></script>
     <script src="../examples/copyWebVR/aframe-thumb-controls-component.min.js"></script>
 
-    
+
 
     <!-- Grab Script -->
     <script>
         //color randomizer
         AFRAME.registerComponent('color-randomizer', {
-          play: function () {
-            this.el.addEventListener('drag-drop', function (evt) {
-              evt.detail.dropped.setAttribute('material', 'color',
-                '#'+(Math.random()*0xFFFFFF<<0).toString(16))
-              // color randomizer credit: http://stackoverflow.com/questions/1484506/random-color-generator-in-javascript#comment6801353_5365036
-            })
-          }
+            play: function () {
+                this.el.addEventListener('drag-drop', function (evt) {
+                    evt.detail.dropped.setAttribute('material', 'color',
+                        '#' + (Math.random() * 0xFFFFFF << 0).toString(16))
+                    // color randomizer credit: http://stackoverflow.com/questions/1484506/random-color-generator-in-javascript#comment6801353_5365036
+                })
+            }
         })
         // turn controller's physics presence on only while button held down
         AFRAME.registerComponent('phase-shift', {
-          init: function () {
-            var el = this.el
-            el.addEventListener('gripdown', function () {
-              el.setAttribute('collision-filter', {collisionForces: true})
-            })
-            el.addEventListener('gripup', function () {
-              el.setAttribute('collision-filter', {collisionForces: false})
-            })
-          }
+            init: function () {
+                var el = this.el
+                el.addEventListener('gripdown', function () {
+                    el.setAttribute('collision-filter', { collisionForces: true })
+                })
+                el.addEventListener('gripup', function () {
+                    el.setAttribute('collision-filter', { collisionForces: false })
+                })
+            }
         })
-      </script>
-      <link rel="stylesheet" type="text/css" href="../assets/examples.css">
-    
-    
+    </script>
+    <link rel="stylesheet" type="text/css" href="../assets/examples.css">
+
+
 </head>
 
 <body>
@@ -66,26 +66,22 @@
         <a-assets>
             <img id="portals-preview" src="../assets/hand-controls.jpg"></img>
             <img id="colortransform" src="./colortransform.png" />
-            <a-mixin id="cube" geometry="primitive: box; width: 0.33; height: 0.33; depth: 0.33"
-                     hoverable grabbable stretchable draggable
-                     event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
-                     event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
-                     dynamic-body shadow></a-mixin>
-            <a-mixin id="transformer" color-randomizer droppable static-body
-                     collision-filter="collisionForces: false"
-                     event-set__dragon="_event: dragover-start; material.wireframe: true"
-                     event-set__dragoff="_event: dragover-end; material.wireframe: false"
-                     geometry="primitive: box; width: 0.5; height: 0.5; depth: 0.5"></a-mixin>
-            <a-mixin id="touch"
-                     physics-collider phase-shift
-                     collision-filter="collisionForces: false"
-                     static-body="shape: sphere; sphereRadius: 0.02"
-                     super-hands="colliderEvent: collisions;
+           
+            <a-mixin id="cube" geometry="primitive: box; width: 0.33; height: 0.33; depth: 0.33" hoverable grabbable
+                stretchable draggable event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false" dynamic-body shadow>
+            </a-mixin>
+            <a-mixin id="transformer" color-randomizer droppable static-body collision-filter="collisionForces: false"
+                event-set__dragon="_event: dragover-start; material.wireframe: true"
+                event-set__dragoff="_event: dragover-end; material.wireframe: false"
+                geometry="primitive: box; width: 0.5; height: 0.5; depth: 0.5"></a-mixin>
+            <a-mixin id="touch" physics-collider phase-shift collision-filter="collisionForces: false"
+                static-body="shape: sphere; sphereRadius: 0.02" super-hands="colliderEvent: collisions;
                                   colliderEventProperty: els;
                                   colliderEndEvent: collisions;
                                   colliderEndEventProperty: clearedEls;">
             </a-mixin>
-          </a-assets>
+        </a-assets>
 
         <!-- lights -->
         <a-entity position="-1 4 0" light="color: #f4f4f4; intensity: 0.6; type: point"></a-entity>
@@ -103,7 +99,7 @@
         </a-entity>
 
         <!-- Ch1 Merge  Component [Left>> Teleport and Right >> Grab]-->
-         <!-- <a-entity id="cameraRig">
+        <!-- <a-entity id="cameraRig">
             <a-sphere scale="0.1 0.1 0.1"></a-sphere>
             <a-entity id="head" camera wasd-controls look-controls></a-entity>
             <a-entity id="leftHand" 
@@ -117,9 +113,9 @@
             </a-entity>
         </a-entity>  -->
 
-        
+
         <!-- Ch2 Merge  Component [Left>> Teleport and Right >> Grab and Teleport]-->
-          <!-- <a-entity id="cameraRig">
+        <!-- <a-entity id="cameraRig">
             <a-sphere scale="0.1 0.1 0.1"></a-sphere>
             <a-entity id="head" camera wasd-controls look-controls></a-entity>
             <a-entity id="leftHand" hand-controls="hand: left;handModelStyle: lowPoly; color: #15ACCF"
@@ -134,23 +130,17 @@
         </a-entity> -->
 
         <!-- Copy Webvr move and teleport -->
-         <a-entity id="cameraRig" 
-        movement-controls 
-        navigator="cameraRig: #cameraRig; 
-        cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable" 
-        position="0 0 0" 
-        rotation="0 0 0">
-          <!-- camera -->
-          <a-entity id="head" camera="active: true" position="0 1.6 0" look-controls="pointerLockEnabled: true; reverseMouseDrag: true" ></a-entity>
-                <!-- Left Controller -->
-                <a-entity id="leftHand" 
-                mixin="touch" 
-                hand-controls="hand: left; handModelStyle: lowPoly; color: #15ACCF" 
+        <a-entity id="cameraRig" movement-controls navigator="cameraRig: #cameraRig; 
+        cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable" position="0 0 0"
+            rotation="0 0 0">
+            <!-- camera -->
+            <a-entity id="head" camera="active: true" position="0 1.6 0"
+                look-controls="pointerLockEnabled: true; reverseMouseDrag: true"></a-entity>
+            <!-- Left Controller -->
+            <a-entity id="leftHand" mixin="touch" hand-controls="hand: left; handModelStyle: lowPoly; color: #15ACCF"
                 visible="true"></a-entity>
-                <!-- Right Controller -->
-                <a-entity id="rhand" 
-                mixin="touch" 
-                hand-controls="hand: right; handModelStyle: lowPoly; color: #15ACCF" 
+            <!-- Right Controller -->
+            <a-entity id="rhand" mixin="touch" hand-controls="hand: right; handModelStyle: lowPoly; color: #15ACCF"
                 visible="true"></a-entity>
         </a-entity>
         <!--  
@@ -172,18 +162,16 @@
         <a-entity class="cube" mixin="cube" position="-1 0.265 -0.5" material="color: blue"></a-entity>
         <a-entity class="cube" mixin="cube" position="1 0.265 -1" material="color: green"></a-entity>
         <a-entity class="cube" mixin="cube" position="1 0.265 -0.5" material="color: green"></a-entity>
-        <a-entity class="transformer" mixin="transformer" position = "0 1.6 -1"
-                  material="src:#colortransform" shadow></a-entity>
+        <a-entity class="transformer" mixin="transformer" position="0 1.6 -1" material="src:#colortransform" shadow>
+        </a-entity>
         <!-- ground collider keeps objets from falling -->
         <a-box static-body width="100" height="0.01" depth="100" visible="false"></a-box>
-        <a-link href="../mouse" title="Basic Example"
-                static-body="shape: sphere; sphereRadius: 0.25"
-                image="#portals-preview"
-                onmouseover="this.setAttribute('link', {highlighted: true})"
-                onmouseout="this.setAttribute('link', {highlighted: false})"
-                position = "0 1.6 0.7" rotation="0 0 0" scale="0.25 0.25 0.25">
+        <a-link href="../mouse" title="Basic Example" static-body="shape: sphere; sphereRadius: 0.25"
+            image="#portals-preview" onmouseover="this.setAttribute('link', {highlighted: true})"
+            onmouseout="this.setAttribute('link', {highlighted: false})" position="0 1.6 0.7" rotation="0 0 0"
+            scale="0.25 0.25 0.25">
         </a-link>
-        
+
     </a-scene>
 
 
