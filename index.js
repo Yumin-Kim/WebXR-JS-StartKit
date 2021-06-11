@@ -115,7 +115,7 @@ app.get("/readproduct", async (req, res) => {
   await conn.query(selectSQL, (error, row, field) => {
     if (error) console.error(error);
     else {
-      res.json(row);
+      res.json({ products: row });
     }
   });
 });
