@@ -10,7 +10,7 @@ dotenv.config();
 
 app.use("/", express.static("public/examples"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 const conn = mysql.createConnection({
   host: process.env.DB_HOST,
