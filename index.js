@@ -166,7 +166,7 @@ app.post("/dropuser", (req, res) => {
 });
 app.post("/order", async (req, res) => {
   const noParse = req.body;
-  const parsedata = JSON.parse(noParse);
+  const parsedata = JSON.parse(noParse.json);
   const { result } = parsedata;
   const data = await service.addOrderInfo(conn, result);
   res.json(data);
