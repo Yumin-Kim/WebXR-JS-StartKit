@@ -182,6 +182,7 @@ app.get("/admin/detail/:user_id", async (req, res) => {
 });
 app.post("/login", (req, res) => {
   const data = req.body;
+  console.log(data);
   const parseData = JSON.parse(data.json);
   conn.query(
     `select * from user where user_id=${parseData.user_id} and passwd=${parseData.pwd}`,
