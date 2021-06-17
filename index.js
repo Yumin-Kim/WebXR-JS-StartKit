@@ -165,7 +165,9 @@ app.post("/dropuser", (req, res) => {
   );
 });
 app.post("/order", async (req, res) => {
-  const { result } = req.body;
+  const noParse = req.body;
+  const parsedata = JSON.parse(noParse);
+  const { result } = parsedata;
   const data = await service.addOrderInfo(conn, result);
   res.json(data);
 });
