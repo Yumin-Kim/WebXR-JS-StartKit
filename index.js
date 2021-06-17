@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql");
 const dotenv = require("dotenv");
+const service = require("./service");
 const PORT = process.env.PORT ? process.env.PORT : 3000;
 
 const app = express();
@@ -163,7 +164,15 @@ app.post("/dropuser", (req, res) => {
     }
   );
 });
-
+app.post("/order", async (req, res) => {
+  const { result } = req.body;
+  const data = await service.addOrderInfo(conn, result);
+  res.json(data);
+});
+app.get("/admin/orderlist", async (req, res) => {
+  const parsedata = await service.getAdminOrderList(conn);
+  return parsedata;
+});
 app.post("/login", (req, res) => {
   const data = req.body;
   const parseData = JSON.parse(data.json);
