@@ -171,7 +171,12 @@ app.post("/order", async (req, res) => {
 });
 app.get("/admin/orderlist", async (req, res) => {
   const parsedata = await service.getAdminOrderList(conn);
-  return parsedata;
+  return res.json(parsedata);
+});
+app.get("/admin/detail/:user_id", async (req, res) => {
+  const { user_id } = req.params;
+  const getDetailOrderInfo = await service.getDetailOrderInfo(conn, user_id);
+  res.json({ result: getDetailOrderInfo });
 });
 app.post("/login", (req, res) => {
   const data = req.body;
