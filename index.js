@@ -194,6 +194,7 @@ app.post("/login", (req, res) => {
             login: "YES",
             user_id: row[0].user_id,
             user_name: row[0].name,
+            phonenumber: row[0].phone_number,
           });
         }
       } else {
