@@ -10,7 +10,7 @@ dotenv.config();
 
 app.use("/", express.static("public/examples"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 const conn = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -182,7 +182,6 @@ app.get("/admin/detail/:user_id", async (req, res) => {
 });
 app.post("/login", (req, res) => {
   const data = req.body;
-  console.log(data);
   const parseData = JSON.parse(data.json);
   conn.query(
     `select * from user where user_id=${parseData.user_id} and passwd=${parseData.pwd}`,
