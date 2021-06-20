@@ -8,7 +8,7 @@ const app = express();
 
 dotenv.config();
 
-app.use("/", express.static("public/examples"));
+app.use("/", express.static("public/marzipano_5"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
