@@ -1,0 +1,49 @@
+<html>
+<head><script type="text/javascript" src="main.js"></script></head>
+<body>
+    <a-scene>
+        <a-assets>
+          <img id="texture" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/2221061282_2f3d118737.jpg">
+        </a-assets>
+      
+        <a-box color="#FFF" width="1.5" height="1.5" depth="1.5"
+               position="-0.75 0.5 0" rotation="0 45 0" 
+               src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/2221061282_2f3d118737.jpg">
+        </a-box>
+        <a-box color="#FFF" width="1.5" height="1.5" depth="1.5"
+               position="1.4 0.5 0" rotation="0 -45 0" 
+               src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/2221061282_2f3d118737.jpg">
+        </a-box>
+       
+        <!-- Top Box -->
+        <a-box color="#FFF" width="1.5" height="1.5" depth="1.5"
+               position="0.05 2.02 -0.1" rotation="0 25 0" 
+               src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/2221061282_2f3d118737.jpg">
+        </a-box>
+      
+        <!-- New lights. -->
+        <a-light type="spot" color="#fff" position="5 5 3" look-at="a-box"></a-light>
+        <a-light type="point" color="#AAA" position="-5 5 7"></a-light>
+        
+        <!-- Sky / Background -->
+        <a-sky color="#000"></a-sky>
+        
+        <!-- Floor -->
+        <a-plane rotation="-90 0 0" position="2 -1 -2" color="#aaa" width="60" height="50" depth="2" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/233187/Untitled-12.jpg"></a-plane>
+        <a-entity sphere-collider="objects: a-box" super-hands hand-controls="hand: right"></a-entity>
+      </a-scene>
+    <!-- <a-scene>
+        <a-assets></a-assets>
+        <a-entity>
+          <a-camera></a-camera>
+          <a-entity sphere-collider="objects: a-box" super-hands="colliderEvent: raycaster-intersection;
+          colliderEventProperty: els;
+          colliderEndEvent: raycaster-intersection-cleared;
+          colliderEndEventProperty: clearedEls"></a-entity>
+          <a-entity sphere-collider="objects: a-box" super-hands hand-controls="hand: right"></a-entity>
+        </a-entity>
+         hover & drag-drop won't have any obvious effect without some additional event handlers or components. See the examples page for more 
+        <a-box hoverable grabbable stretchable draggable dropppable color="blue" position="0 0 -1"></a-box>
+      </a-scene> -->
+</body>
+</html>

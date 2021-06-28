@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Advanced Hello World A-Frame WebXR PART 1</title>
+    <meta name="description" content="Advanced Hello World, WebXR! in A-Frame">
+    <script src="./aframe-v1.1.0.min.js"></script>
+    <script src="./aframe-environment-component.min.js"></script>
+    <script src="./aframe-extras.min.js"></script>
+    <script src="./aframe-teleport-controls.js"></script>
+    <script src="./aframe-thumb-controls-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: #FAFAFA">
+
+      <!-- Basic movement and teleportation  -->
+      <a-entity id="cameraRig" 
+      movement-controls="constrainToNavMesh: false;" 
+      navigator="cameraRig: #cameraRig; 
+      cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable" 
+      position="0 0 0" 
+      rotation="0 0 0">
+        <!-- camera -->
+        <a-entity id="head" camera="active: true" position="0 1.6 0" look-controls="pointerLockEnabled: true; reverseMouseDrag: true" ></a-entity>
+              <!-- Left Controller -->
+              <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color: #15ACCF" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60" visible="true"></a-entity>
+              <!-- Right Controller -->
+              <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color: #15ACCF" laser-controls raycaster="showLine: true; far: 10; interval: 0; objects: .clickable, a-link;" line="color: #7cfc00; opacity: 0.5" visible="true"></a-entity>
+      </a-entity>
+
+      <a-box position="-1 0.66921 -3" rotation="0 45 0" color="#4CC3D9" shadow="" material="" geometry=""></a-box>
+      <a-sphere position="0 1.44508 -5" radius="1.25" color="#EF2D5E" shadow="" material="" geometry=""></a-sphere>
+      <a-cylinder position="1 0.8993 -3" radius="0.5" height="1.5" color="#FFC65D" shadow="" material="" geometry=""></a-cylinder>
+      <a-plane position="0 0.08958 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow="recieve: true" material="" geometry=""></a-plane>
+
+      <a-entity environment="preset: forest; dressing: mushrooms; dressingColor: #6e1d8b;"></a-entity>
+
+      <a-entity light="type:directional; castShadow:true;" position="1 1 1"></a-entity>
+
+    </a-scene>
+  </body>
+</html>
