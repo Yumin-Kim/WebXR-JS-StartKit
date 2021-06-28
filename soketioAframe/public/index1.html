@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <script src="/dist/bundle.js"></script>
+     <!-- <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@^4.1.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras/dist/aframe-physics-extras.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+   -->
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="./module/aframe-teleport-controls.min.js"></script>
+    <script src="https://unpkg.com/aframe-input-mapping-component/dist/aframe-input-mapping-component.min.js"></script>
+    <script src="./module/common/mappings.js"></script>
+
+
+   <title>socket io Aframe</title>
+    <!-- Importing aframe-physics-system with Yarn/NPM causes issues -->
+  </head>
+
+  <body>
+  
+    <a-scene physics="gravity: -9.8" game background="color: black" renderer="antialias: true">
+      <a-assets>
+        <a-asset-item src="https://aframefolder.s3.ap-northeast-2.amazonaws.com/Avent_sport.obj" id="ave-m"></a-asset-item>
+      </a-assets>
+      
+      <!-- Plane -->
+      <a-box static-body id="ground" scale="10 1 10" position="0 -0.5 0" color="#444444" visible="true"></a-box>
+
+      <!-- Box -->
+      <a-box rotation="-10 10 20" static-body class="collidable" position="0 0.3 -1" color="#cccccc"></a-box>
+      <a-entity obj-model="obj:#ave-m" position="3 0.2 1" scale="0.8 0.8 0.8" ></a-entity>
+
+      <!-- Camera Rig - has to be here because of A-Frame's order-dependent rendering -->
+      <a-entity id="rig">
+        <!-- <a-entity quest-controls> -->
+          <!--  -->
+          <a-entity id="camera" camera="active: true" position="0 1.6 0" look-controls wasd-controls>
+          </a-entity>
+            <!-- <a-entity id="head" camera wasd-controls look-controls></a-entity> -->
+            <a-entity id="leftHand" hand-controls="hand: left; 
+                      handModelStyle: lowPoly; 
+                      color: #15ACCF"
+              teleport-controls="cameraRig: #rig; teleportOrigin: #camera; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60"
+              visible="true">
+          </a-entity>
+
+        <!-- </a-entity> -->
+      </a-entity>
+
+      <!-- <a-entity id="rig">
+        <a-entity>
+          <a-entity id="camera"position="0 1.6 0">
+            <a-entity>
+
+              <a-entity id="cameraRig">
+                <a-entity id="head" camera wasd-controls look-controls></a-entity>
+                <a-entity id="leftHand" hand-controls="hand: left; 
+                          handModelStyle: lowPoly; 
+                          color: #15ACCF"
+                  teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60"
+                  visible="true">
+                </a-entity>
+              </a-entity>
+  
+            </a-entity>
+          </a-entity> 
+        </a-entity>
+      </a-entity> -->
+  
+    </a-scene>
+  </body>
+</html>
